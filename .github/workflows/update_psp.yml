@@ -1,0 +1,36 @@
+name: Update PSP Data
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # Runs at 05:30 UTC (11:00 AM IST)
+  workflow_dispatch:      # Allows manual testing
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run Scraper
+      run: python scraper.py
+
+    - name: Commit and Push
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        git add latest_psp.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update PSP Data" && git push)
