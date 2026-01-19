@@ -1,0 +1,8 @@
+{
+    "status": "failed",
+    "last_updated": "2026-01-19 10:53:54",
+    "energy_met": "N/A",
+    "peak_shortage": "N/A",
+    "pdf_url": "https://grid-india.in/reports/daily-reports/psp-report/",
+    "error_message": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+}
